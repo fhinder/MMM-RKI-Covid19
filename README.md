@@ -1,2 +1,4 @@
 # MMM-RKI-Covid19
-A MagicMirror module for RKI-Covid19 Data
+A [MagicMirror²](https://magicmirro.builders) module for RKI-Covid19 Data
+
+![Example](screenshot.jpg)
