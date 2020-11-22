@@ -9,7 +9,7 @@
 Module.register("MMM-RKI-Covid19", {
 	// Default module config
 	defaults: {
-		reloadInterval: 60*1000, //once per minute
+		reloadInterval: 60*60*1000, //once per hour
 		tableClass: "small",
 		counties: [
 			'SK Köln',
