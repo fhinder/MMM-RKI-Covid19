@@ -21,8 +21,8 @@ Add the module to the modules list in  your config file:
 
 ````javascript
 {
-	module: "MMM-RKI-Covid19"
-	position: "top_right"
+	module: "MMM-RKI-Covid19",
+	position: "top_right",
 	config:{
 		reloadInterval: 60*60*1000,
 		tableClass: "small",
