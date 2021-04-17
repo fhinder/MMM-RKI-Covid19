@@ -19,7 +19,7 @@ Module.register("MMM-RKI-Covid19", {
 		states: [
 			'Nordrhein-Westfalen',
 			'Berlin',
-			'Baden-Würtemberg'
+			'Baden-Württemberg'
 		]
 	},
 	
