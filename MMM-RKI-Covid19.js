@@ -15,6 +15,11 @@ Module.register("MMM-RKI-Covid19", {
 			'SK Köln',
 			'SK Berlin Mitte',
 			'SK München'
+		],
+		states: [
+			'Nordrhein-Westfalen',
+			'Berlin',
+			'Baden-Würtemberg'
 		]
 	},
 	
@@ -44,7 +49,7 @@ Module.register("MMM-RKI-Covid19", {
 		var table = document.createElement("table");
 		table.className = this.config.tableClass;
 		
-		var data = ['Kreis', 'Inzidenz'];
+		var data = ['Region', 'Inzidenz'];
 		var thead = table.createTHead();
 		var row = thead.insertRow();
 		for (var key of data) {
@@ -54,22 +59,22 @@ Module.register("MMM-RKI-Covid19", {
 			row.appendChild(th);
 		}
 		
-		for (let i =0; i<this.dataRKI.length; i++){
+		for (let i = 0; i < this.dataRKI.length; i++){
 			var d = this.dataRKI[i];
 			var row = document.createElement("tr");
 			table.appendChild(row);
 			
 			var countyCell = document.createElement("td");
 			countyCell.className = "county";
-			countyCell.innerHTML = d.attributes.county;
+			countyCell.innerHTML = d.county;
 			row.appendChild(countyCell);
 			
 			var c7_100kCell = document.createElement("td");
 			c7_100kCell.className = "cases7_per_100k";
-			c7_100kCell.innerHTML = Math.round(d.attributes.cases7_per_100k);
+			c7_100kCell.innerHTML = Math.round(d.cases7_per_100k);
 			row.appendChild(c7_100kCell);
 			
-			if(i==0) this.dataRKI.lastUpdate = d.attributes.last_update;
+			if(i==0) this.dataRKI.lastUpdate = d.last_update;
 		}
 		return table;
 	},

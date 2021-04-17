@@ -30,6 +30,11 @@ Add the module to the modules list in  your config file:
 			'SK Köln',
 			'SK Berlin Mitte',
 			'SK München' 
+		],
+		states: [
+			'Nordrhein-Westfalen',
+			'Berlin',
+			'Baden-Würtemberg'
 		]
 	}
 },
@@ -39,8 +44,9 @@ Add the module to the modules list in  your config file:
 |option         | description|
 |---------------|------------|
 |reloadInterval | Reload Interval in ms <br> <b>Possible values</b>: <code>number</code> <br> <b>Default value</b>: 3600000 |
-|tableClass	| Table configuration <br> <b>Default value</b>: "small" |
+|tableClass	| Table configuration <br>. Check the general MagicMirror css file for possible values. <b>Default value</b>: "small" |
 |counties	| Array of counties to be displayed. List of counties can be found in the API manual (check dependencies). <br> <b>Possible values</b>: <code>array of string</code> <br> <b>Default value</b>: ['SK Köln', 'SK Berlin Mitte', 'SK München'] |
+|states	| Array of states to be displayed. List of states can be found in the API manaual (check dependencies). <br> <b>Possible values</b>: <code>array of string</code> <br> <b>Default value</b>: ['Nordrhein-Westfalen', 'Berlin', 'Baden-Würtemberg'] |
 
 
 
