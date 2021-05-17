@@ -71,7 +71,7 @@ module.exports = NodeHelper.create({
 							result.push({
 								'county': states[i],
 								'cases7_per_100k': dataAll[j].attributes.cases7_bl_per_100k,
-								'last_update': dataAll[j].attributes.last_update
+								'last_update': self.parseDate(dataAll[j].attributes.last_update)
 							});
 							break;
 						}
@@ -83,7 +83,7 @@ module.exports = NodeHelper.create({
 							result.push({
 								'county': counties[i],
 								'cases7_per_100k': dataAll[j].attributes.cases7_per_100k,
-								'last_update': dataAll[j].attributes.last_update
+								'last_update': self.parseDate(dataAll[j].attributes.last_update)
 							});
 							break;
 						}
@@ -92,5 +92,40 @@ module.exports = NodeHelper.create({
 				self.sendSocketNotification("RKI_DATA", result);
 			}
 		}); 
+	},
+
+	parseDate: function (dateToParse) {
+		var dateArray = dateToParse.split(",");
+		//Länge ==2
+		try {
+			if (dateArray.length == 2) {
+				var timeOfDay = dateArray[1].split(" ");
+				var hoursMinutes = timeOfDay[1].split(":");
+				if (hoursMinutes.length == 2) {
+					var hours = hoursMinutes[0];
+					var minutes = hoursMinutes[1];
+				} else {
+					throw new Error();
+				}
+				dateArray = dateArray[0].split(".");
+				if (dateArray.length == 3) {
+					var day = dateArray[0];
+					var month = dateArray[1];
+					var year = dateArray[2];
+				} else {
+					throw new Error();
+				}
+				return new Date(year, month-1, day, hours, minutes);
+
+			} else {
+				throw new Error();
+			}
+		} catch (err) {
+			console.log("Error in parsing date");
+			return dateToParse;
+		}
+		
 	}
+
+
 });

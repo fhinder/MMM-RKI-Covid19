@@ -11,6 +11,7 @@ Module.register("MMM-RKI-Covid19", {
 	defaults: {
 		reloadInterval: 60*60*1000, //once per hour
 		tableClass: "small",
+		showUpdateTimestampInHeader: true,
 		counties: [
 			'SK Köln',
 			'SK Berlin Mitte',
@@ -81,8 +82,27 @@ Module.register("MMM-RKI-Covid19", {
 	
 	// Override getHeader method.
 	getHeader: function () {
-		if(this.dataRKI.lastUpdate) return "RKI-Daten von " + this.dataRKI.lastUpdate;
-		return this.data.header ? this.data.header : "RKI-Daten";
+		if (this.config.showUpdateTimestampInHeader == false) {
+			if (this.dataRKI.lastUpdate) {
+				var dateNow = new Date;
+				var dateUpdate = new Date(this.dataRKI.lastUpdate);
+				console.log(dateNow);
+				console.log(dateUpdate);
+				var delta = Math.abs(dateNow - dateUpdate) / (1000 * 60 * 60);
+				console.log(delta)
+				if (delta >= 24) {
+					return "Last Update is older than 24hours: " + dateUpdate.toLocaleDateString();
+				}
+			}
+			return this.data.header;
+		}else {
+			if (this.dataRKI.lastUpdate) {
+				var dateUpdate = new Date(this.dataRKI.lastUpdate);
+				if (this.data.header) return this.data.header + " updated on " + dateUpdate.toLocaleDateString();
+				return "updated on " + dateUpdate.toLocaleDateString();
+			}
+			return this.data.header;
+		}
 	},
 	
 	// Override notification handler.
