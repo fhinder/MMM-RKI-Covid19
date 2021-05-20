@@ -12,6 +12,7 @@ Module.register("MMM-RKI-Covid19", {
 		reloadInterval: 60*60*1000, //once per hour
 		tableClass: "small",
 		showUpdateTimestampInHeader: true,
+		showUpdateTimestampInFooter: false,
 		counties: [
 			'SK Köln',
 			'SK Berlin Mitte',
@@ -45,7 +46,6 @@ Module.register("MMM-RKI-Covid19", {
 			wrapper.className = "dimmed light small";
 			return wrapper;
 		}
-	
 		
 		var table = document.createElement("table");
 		table.className = this.config.tableClass;
@@ -77,7 +77,17 @@ Module.register("MMM-RKI-Covid19", {
 			
 			if(i==0) this.dataRKI.lastUpdate = d.last_update;
 		}
-		return table;
+		wrapper.appendChild(table);
+		
+		if(this.config.showUpdateTimestampInFooter){
+			let updateinfo = document.createElement("div");
+			let dateUpdate = new Date(this.dataRKI.lastUpdate);
+			updateinfo.className = "xsmall light align-right";
+			updateinfo.innerHTML = "Update: " + dateUpdate.toLocaleDateString();
+			wrapper.appendChild(updateinfo);
+		}
+		
+		return wrapper;
 	},
 	
 	// Override getHeader method.
