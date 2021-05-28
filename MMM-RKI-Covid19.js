@@ -79,12 +79,20 @@ Module.register("MMM-RKI-Covid19", {
 		}
 		wrapper.appendChild(table);
 		
-		if(this.config.showUpdateTimestampInFooter){
-			let updateinfo = document.createElement("div");
+		if(this.dataRKI.lastUpdate){
+			let updateInfo = document.createElement("div");
+			updateInfo.className = "xsmall light align-right";
+			let dateNow = new Date;
 			let dateUpdate = new Date(this.dataRKI.lastUpdate);
-			updateinfo.className = "xsmall light align-right";
-			updateinfo.innerHTML = "Update: " + dateUpdate.toLocaleDateString();
-			wrapper.appendChild(updateinfo);
+			let delta = Math.abs(dateNow - dateUpdate) / (1000 * 60 * 60);
+			if (delta >= 24) {
+				updateInfo.innerHTML = "Last update is older than 24 hours: " + dateUpdate.toLocaleDateString();
+			} else {
+				if(this.config.showUpdateTimestampInFooter) {
+					updateInfo.innerHTML = "Update: " + dateUpdate.toLocaleDateString();
+				}
+			}
+			wrapper.appendChild(updateInfo);
 		}
 		
 		return wrapper;
@@ -93,17 +101,6 @@ Module.register("MMM-RKI-Covid19", {
 	// Override getHeader method.
 	getHeader: function () {
 		if (this.config.showUpdateTimestampInHeader == false) {
-			if (this.dataRKI.lastUpdate) {
-				var dateNow = new Date;
-				var dateUpdate = new Date(this.dataRKI.lastUpdate);
-				console.log(dateNow);
-				console.log(dateUpdate);
-				var delta = Math.abs(dateNow - dateUpdate) / (1000 * 60 * 60);
-				console.log(delta)
-				if (delta >= 24) {
-					return "Last Update is older than 24hours: " + dateUpdate.toLocaleDateString();
-				}
-			}
 			return this.data.header;
 		}else {
 			if (this.dataRKI.lastUpdate) {
