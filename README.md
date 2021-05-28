@@ -10,7 +10,7 @@ The API can be used without any registration
 
 ## Installation
 
-Go to your MAcigMirror's module folder:
+Go to your MagicMirror's module folder:
 cd ~/MagicMirror/modules
 
 Clone this repository:
@@ -27,6 +27,7 @@ Add the module to the modules list in  your config file:
 	config:{
 		reloadInterval: 60*60*1000,
 		showUpdateTimestampInHeader: false,
+		showUpdateTimestampInFooter: false,
 		tableClass: "small",
 		counties: [		
 			'SK Köln',
@@ -47,9 +48,10 @@ Add the module to the modules list in  your config file:
 |---------------|------------|
 |reloadInterval | Reload Interval in ms <br> <b>Possible values</b>: <code>number</code> <br> <b>Default value</b>: 3600000 |
 |showUpdateTimestampInHeader | Boolean to switch "last update time" in header on or off. If the last update is older than 24hours, the last update time is shown independent of this switch to indicate outdated data. <br> <b>Possible values</b>: <code> true, false <code/> <b>Default value</b>: true |
+|showUpdateTimestampInFooter | Boolean to show "last update time" below the table. <br> <b>Possible values</b>: <code> true, false <code/> <b>Default value</b>: false |
 |tableClass	| Table configuration <br>. Check the general MagicMirror css file for possible values. <b>Default value</b>: "small" |
 |counties	| Array of counties to be displayed. List of counties can be found in the API manual (check dependencies). <br> <b>Possible values</b>: <code>array of string</code> <br> <b>Default value</b>: ['SK Köln', 'SK Berlin Mitte', 'SK München'] |
-|states	| Array of states to be displayed. List of states can be found in the API manaual (check dependencies). <br> <b>Possible values</b>: <code>array of string</code> <br> <b>Default value</b>: ['Nordrhein-Westfalen', 'Berlin', 'Baden-Würtemberg'] |
+|states	| Array of states to be displayed. List of states can be found in the API manual (check dependencies). <br> <b>Possible values</b>: <code>array of string</code> <br> <b>Default value</b>: ['Nordrhein-Westfalen', 'Berlin', 'Baden-Würtemberg'] |
 
 
 
