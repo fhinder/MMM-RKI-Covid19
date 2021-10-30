@@ -1,0 +1,23 @@
+{
+  "name": "mmm-rki-covid19",
+  "version": "1.1.0",
+  "description": "A MagicMirror module for RKI-Covid19 Data",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fhinder/MMM-RKI-Covid19.git"
+  },
+  "keywords": [
+    "magicmirror",
+    "magicmirror2",
+    "rki"
+  ],
+  "author": "fhinder",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fhinder/MMM-RKI-Covid19/issues"
+  },
+  "homepage": "https://github.com/fhinder/MMM-RKI-Covid19#readme",
+  "dependencies": {
+    "native-request": "^1.1.0"
+  }
+}
