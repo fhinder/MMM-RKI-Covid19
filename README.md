@@ -11,11 +11,17 @@ The API can be used without any registration
 ## Installation
 
 Go to your MagicMirror's module folder:
+```
 cd ~/MagicMirror/modules
-
+```
 Clone this repository:
 ````
 git clone https://github.com/fhinder/MMM-RKI-Covid19.git
+````
+Execute npm install in the module’s directory:
+````
+cd MMM-RKI-Covid19
+npm install
 ````
 Add the module to the modules list in  your config file:
 

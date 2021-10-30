@@ -5,7 +5,7 @@
 */
 
 var NodeHelper = require("node_helper")
-var request = require("request");
+var request = require("native-request");
 
 const BASE_URL = "https://services7.arcgis.com/mOBPykOjAyBO2ZKk/arcgis/rest/services/RKI_Landkreisdaten/FeatureServer/0/query?";
 
@@ -58,12 +58,12 @@ module.exports = NodeHelper.create({
 			}
 		};
 
-		request(options, function (error, response) {
+		request.request(options, function (error, response) {
 			if (error) {
 				throw new Error(error);
 				self.sendSocketNotification("RKI_DATA_ERROR", error);
 			} else {
-				var dataAll = (JSON.parse(response.body)).features;
+				var dataAll = (JSON.parse(response)).features;
 				var result = [];
 				for (let i = 0; i < states.length; i++) {
 					for (let j = 0; j < dataAll.length; j++) {
