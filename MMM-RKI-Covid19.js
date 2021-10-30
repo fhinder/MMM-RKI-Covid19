@@ -12,6 +12,7 @@ Module.register("MMM-RKI-Covid19", {
 		reloadInterval: 60*60*1000, //once per hour
 		tableClass: "small",
 		showUpdateTimestampInHeader: true,
+		showUpdateTimestampInFooter: false,
 		counties: [
 			'SK Köln',
 			'SK Berlin Mitte',
@@ -45,7 +46,6 @@ Module.register("MMM-RKI-Covid19", {
 			wrapper.className = "dimmed light small";
 			return wrapper;
 		}
-	
 		
 		var table = document.createElement("table");
 		table.className = this.config.tableClass;
@@ -77,23 +77,30 @@ Module.register("MMM-RKI-Covid19", {
 			
 			if(i==0) this.dataRKI.lastUpdate = d.last_update;
 		}
-		return table;
+		wrapper.appendChild(table);
+		
+		if(this.dataRKI.lastUpdate){
+			let updateInfo = document.createElement("div");
+			updateInfo.className = "xsmall light align-right";
+			let dateNow = new Date;
+			let dateUpdate = new Date(this.dataRKI.lastUpdate);
+			let delta = Math.abs(dateNow - dateUpdate) / (1000 * 60 * 60);
+			if (delta >= 24) {
+				updateInfo.innerHTML = "Last update is older than 24 hours: " + dateUpdate.toLocaleDateString();
+			} else {
+				if(this.config.showUpdateTimestampInFooter) {
+					updateInfo.innerHTML = "Update: " + dateUpdate.toLocaleDateString();
+				}
+			}
+			wrapper.appendChild(updateInfo);
+		}
+		
+		return wrapper;
 	},
 	
 	// Override getHeader method.
 	getHeader: function () {
 		if (this.config.showUpdateTimestampInHeader == false) {
-			if (this.dataRKI.lastUpdate) {
-				var dateNow = new Date;
-				var dateUpdate = new Date(this.dataRKI.lastUpdate);
-				console.log(dateNow);
-				console.log(dateUpdate);
-				var delta = Math.abs(dateNow - dateUpdate) / (1000 * 60 * 60);
-				console.log(delta)
-				if (delta >= 24) {
-					return "Last Update is older than 24hours: " + dateUpdate.toLocaleDateString();
-				}
-			}
 			return this.data.header;
 		}else {
 			if (this.dataRKI.lastUpdate) {
